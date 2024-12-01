@@ -9,18 +9,19 @@ package model;
  * @author Lenovo
  */
 public class model_produk {
-    private Integer id_product;
-    private String product_name;
-    private String description;
-    private Integer stock;
-    private String exp;
-    private String created_at;
 
-    public Integer getId_product() {
+
+    private String id_product;
+    private String product_name;
+    private Double harga_beli;
+    private Double harga_jual;
+    private Integer stock;
+
+    public String getId_product() {
         return id_product;
     }
 
-    public void setId_product(Integer id_product) {
+    public void setId_product(String id_product) {
         this.id_product = id_product;
     }
 
@@ -32,12 +33,20 @@ public class model_produk {
         this.product_name = product_name;
     }
 
-    public String getDescription() {
-        return description;
+    public Double getHarga_beli() {
+        return harga_beli;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setHarga_beli(Double harga_beli) {
+        this.harga_beli = harga_beli;
+    }
+
+    public Double getHarga_jual() {
+        return harga_jual;
+    }
+
+    public void setHarga_jual(Double harga_jual) {
+        this.harga_jual = harga_jual;
     }
 
     public Integer getStock() {
@@ -47,23 +56,7 @@ public class model_produk {
     public void setStock(Integer stock) {
         this.stock = stock;
     }
-
-    public String getExp() {
-        return exp;
-    }
-
-    public void setExp(String exp) {
-        this.exp = exp;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
-
+    
     public Object getid_product() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

@@ -2,19 +2,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package main;
+package FormAdmin;
+
+import static FormAdmin.User.viewData;
+import koneksi.koneksi;
+import java.awt.PopupMenu;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Lenovo
  */
 public class Produk extends javax.swing.JPanel {
-
+    static DefaultTableModel m, mod_p;
+    private PopupMenu TambahUser;
     /**
      * Creates new form Produk
      */
     public Produk() {
         initComponents();
+        
+        settingTable();        
+        viewData("");
     }
 
     /**
@@ -29,12 +44,12 @@ public class Produk extends javax.swing.JPanel {
         mainPanel = new javax.swing.JPanel();
         dataProduk = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblproduk = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         bt_tambah = new javax.swing.JButton();
         bt_hapus = new javax.swing.JButton();
         bt_batal = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txt_cari2 = new javax.swing.JTextField();
         bt_cari = new javax.swing.JButton();
         tambahProduk = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -60,18 +75,26 @@ public class Produk extends javax.swing.JPanel {
         dataProduk.setBackground(new java.awt.Color(255, 255, 255));
         dataProduk.setPreferredSize(new java.awt.Dimension(600, 500));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblproduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id produk", "nama produk", "harga_beli", "harga_jual", "stok", "satuan"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblproduk);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Data Produk");
@@ -115,39 +138,38 @@ public class Produk extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(dataProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dataProdukLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(dataProdukLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(bt_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bt_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                        .addComponent(bt_cari)
-                        .addGap(28, 28, 28)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17))
-                    .addGroup(dataProdukLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 733, Short.MAX_VALUE))
+                    .addGroup(dataProdukLayout.createSequentialGroup()
+                        .addGroup(dataProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(dataProdukLayout.createSequentialGroup()
+                                .addComponent(bt_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(bt_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(bt_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bt_cari)
+                                .addGap(18, 18, 18)
+                                .addComponent(txt_cari2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         dataProdukLayout.setVerticalGroup(
             dataProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, dataProdukLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(27, 27, 27)
+                .addGap(26, 26, 26)
                 .addGroup(dataProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_tambah, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_hapus, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_batal, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bt_cari)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(247, Short.MAX_VALUE))
+                    .addComponent(txt_cari2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         mainPanel.add(dataProduk, "card2");
@@ -212,7 +234,7 @@ public class Produk extends javax.swing.JPanel {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 757, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,7 +295,7 @@ public class Produk extends javax.swing.JPanel {
                     .addComponent(bt_batal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         mainPanel.add(tambahProduk, "card2");
@@ -346,8 +368,6 @@ public class Produk extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -355,5 +375,88 @@ public class Produk extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel tambahProduk;
+    private javax.swing.JTable tblproduk;
+    private javax.swing.JTextField txt_cari2;
     // End of variables declaration//GEN-END:variables
+ private void settingTable() {
+        m = (DefaultTableModel) tblproduk.getModel();        
+
+        // Mengatur lebar kolom sesuai jumlah kolom yang ada
+        tblproduk.getColumnModel().getColumn(0).setMinWidth(50);   // id
+        tblproduk.getColumnModel().getColumn(0).setMaxWidth(70);
+
+        tblproduk.getColumnModel().getColumn(0).setMinWidth(50);  // username
+        tblproduk.getColumnModel().getColumn(0).setMaxWidth(70);
+
+        tblproduk.getColumnModel().getColumn(2).setMinWidth(50);  // password
+        tblproduk.getColumnModel().getColumn(2).setMaxWidth(70);
+        
+        tblproduk.getColumnModel().getColumn(0).setMinWidth(50);   // id
+        tblproduk.getColumnModel().getColumn(0).setMaxWidth(70);
+
+        tblproduk.getColumnModel().getColumn(0).setMinWidth(50);  // username
+        tblproduk.getColumnModel().getColumn(0).setMaxWidth(70);
+
+        tblproduk.getColumnModel().getColumn(2).setMinWidth(50);  // password
+        tblproduk.getColumnModel().getColumn(2).setMaxWidth(70);
+
+    
+       
+    }
+    
+    public static void viewData(String where) {
+        try {
+            // Hapus semua baris di model tabel
+            for (int i = m.getRowCount() - 1; i >= 0; i--) {
+                m.removeRow(i);
+            }
+
+            Connection K = koneksi.Go();
+            Statement S = K.createStatement();
+            String Q = "SELECT * FROM product " + where;
+            ResultSet R = S.executeQuery(Q);
+            int no = 1;
+            while (R.next()) {
+                String id = R.getString("id_product");
+                String product_name = R.getString("product_name");
+                Double harga_beli = R.getDouble("harga_beli");
+                Double harga_jual = R.getDouble("harga_jual");
+                int stock = R.getInt("stok");
+                String satuan = R.getString("satuan");
+               
+
+                Object[] D = {id, product_name, harga_beli, harga_jual, stock, satuan};
+                m.addRow(D);
+
+                no++;
+            }
+        } catch (SQLException e) {
+            // Error handling
+            JOptionPane.showMessageDialog(null, "Error fetching data: " + e.getMessage());
+        }
+    }
+
+
+   
+
+        private void cariData() {
+           String keyword = txt_cari2.getText().trim();
+           if (!keyword.isEmpty()) {
+               String where = "WHERE username LIKE '%" + keyword + "%' OR role LIKE '%" + keyword + "%'";
+               viewData(where);
+           } else {
+               viewData(""); // Jika keyword kosong, tampilkan semua data
+           }
+       }
+
+    private static class e {
+
+        private static String getMessage() {
+            throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        }
+
+        public e() {
+        }
+    }
+
 }

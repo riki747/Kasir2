@@ -19,7 +19,7 @@ public class koneksi {
 
             connection = DriverManager.getConnection(url, user, password); // Gunakan variabel instance
             connection.setAutoCommit(false);
-            System.out.println("Koneksi Berhasil!");
+            System.out.println("Koneksi berhasil dijalankan!");
 
         } catch (SQLException e) {
             System.err.println("Koneksi Gagal: " + e.getMessage());
@@ -42,6 +42,8 @@ public class koneksi {
         }
         return connection;
     }
+    
+
 }
 
 

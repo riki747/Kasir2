@@ -41,10 +41,50 @@ public class model_user {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+   
+
+    public String getAlamat() {
+        return alamat;
+    }
+
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
+    
+    
+
+    public String getNo_telepon() {
+        return no_telepon;
+    }
+
+    public void setNo_telepon(String no_telepon) {
+        this.no_telepon = no_telepon;
+    }
     private int id_user;
     private String username;
     private String password;
     private String role;
+    private String fullname;
+    private String email;
+    private String no_telepon;
+    private String alamat;
 
     public Object getCreated_at1() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

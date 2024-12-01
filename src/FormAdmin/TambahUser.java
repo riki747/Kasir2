@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package main;
+package FormAdmin;
 
 import com.sun.jdi.connect.spi.Connection;
 import java.awt.PopupMenu;
@@ -131,38 +131,16 @@ public class TambahUser extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bt_simpan;
-    private javax.swing.JButton bt_simpan1;
-    private javax.swing.JButton btn_batal;
-    private javax.swing.JButton btn_batal1;
     private javax.swing.JButton btn_tambah;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel judul;
     private javax.swing.JPanel mainPanel;
-    private javax.swing.JPanel tambahUser;
-    private javax.swing.JPanel tambahUser1;
     private javax.swing.JPanel tambahUser2;
-    private javax.swing.JPasswordField txtPassword;
-    private javax.swing.JPasswordField txtPassword1;
-    private javax.swing.JTextField txtUsername;
-    private javax.swing.JTextField txtUsername1;
     // End of variables declaration//GEN-END:variables
 }

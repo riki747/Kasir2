@@ -64,11 +64,13 @@ public class tablemod_user extends AbstractTableModel {
     public int getRowCount() {
     return list.size();
     }
+    
+    private final String[] columnNames = {"ID User", "Nama", "Password", "Role", "Fullname", "Email", "No_telepon", "Alamat"};
 
     @Override
      public int getColumnCount() {
     // Implementasikan sesuai kebutuhan
-    return 5;
+    return 8;
     }
 
     @Override
@@ -78,24 +80,23 @@ public class tablemod_user extends AbstractTableModel {
             case 1: return list.get(rowIndex).getUsername();
             case 2: return list.get(rowIndex).getPassword();
             case 3: return list.get(rowIndex).getRole();
-            case 4: return list.get(rowIndex).getCreated_at1();
+            case 4: return list.get(rowIndex).getFullname();
+            case 5: return list.get(rowIndex).getEmail();
+            case 6: return list.get(rowIndex).getNo_telepon();
+            case 7: return list.get(rowIndex).getAlamat();
+            
            
             default: return null;
         }
     }
     
+   
     @Override
     public String getColumnName(int column){
-        switch (column){
-            case 0: return "Id User";
-            case 1: return "Username";
-            case 2: return "Password";
-            case 3: return "Role";
-            case 4: return "dibuat";
-           
-            
-            default: return null;    
-            
-        }     
-      }  
+        if (column == 0) {
+            return "   " + columnNames[column];
+        }else{
+            return columnNames[column];
+        }
+    }
     }

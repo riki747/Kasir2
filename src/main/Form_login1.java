@@ -4,6 +4,7 @@
  */
 package main;
 
+import FormKasir.Menu_Kasir;
 import java.awt.Frame;
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import koneksi.koneksi;
-import main.Menu_Utama;
+import FormAdmin.Menu_Admin;
 import model.model_user;
 
 /**
@@ -323,14 +324,14 @@ public class Form_login1 extends javax.swing.JFrame {
 //                fungsi.savelog("username "+user+" berhasil melakukan login");
                 JOptionPane.showMessageDialog(this, "Sukses Login");
                 if (P.getRole().equals("Admin")) {
-                    Menu_Utama O = new Menu_Utama(); // P adalah objek profil pengguna
+                    Menu_Admin O = new Menu_Admin(); // P adalah objek profil pengguna
                     O.setExtendedState(Frame.MAXIMIZED_BOTH);
                     this.setVisible(false);
                     O.setVisible(true);
 
 
                 }else if (P.getRole().equals("Kasir")) {
-                       Kasir O = new Kasir(); // P adalah objek profil pengguna
+                       Menu_Kasir O = new Menu_Kasir(); // P adalah objek profil pengguna
                        O.setExtendedState(Frame.MAXIMIZED_BOTH);
                        this.setVisible(false);
                        O.setVisible(true);
